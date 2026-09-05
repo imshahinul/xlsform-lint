@@ -65,7 +65,7 @@ def test_public_rule_ids_are_the_exact_v1_catalog() -> None:
 
 
 def test_public_python_surface_is_cli_only() -> None:
-    assert xlsform_lint.__version__ == "0.1.0"
+    assert xlsform_lint.__version__ == "0.1.1"
     assert not hasattr(xlsform_lint, "__all__")
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "The supported V1 public interface is the CLI." in readme

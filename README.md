@@ -7,7 +7,8 @@ authority: this tool makes selected upstream failures easier to act on and adds
 bounded authoring checks; it does not replace pyxform or XLSForm testing on the
 target data-collection platform.
 
-Version 0.1.0 is prepared for the first public release but is not yet published.
+Version 0.1.0 is available on PyPI. Version 0.1.1 is being prepared as a local
+patch-release freeze and has not been published.
 The project does not validate runtime XPath behavior, execute a form, load or
 validate external CSV data, or claim to find everything outside pyxform's
 validation.
@@ -21,12 +22,10 @@ For a local checkout or a built wheel:
 
 ```bash
 python -m pip install .
-python -m pip install dist/xlsform_lint-0.1.0-py3-none-any.whl
+python -m pip install dist/xlsform_lint-0.1.1-py3-none-any.whl
 ```
 
-After the first public package release, the following will be the public
-installation syntax. It is **future syntax only**; version 0.1.0 is prepared
-locally but is not currently published on PyPI:
+Install the current public release from PyPI with:
 
 ```bash
 python -m pip install xlsform-lint

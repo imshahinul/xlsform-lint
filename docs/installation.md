@@ -1,10 +1,9 @@
 # Installation
 
-## Prepared public release
+## Public release
 
-Version 0.1.0 is prepared for the first public release but is not published to
-PyPI yet. After publication, install it in a Python 3.11-or-newer environment
-with:
+Version 0.1.0 is published on PyPI. Install the current public release in a
+Python 3.11-or-newer environment with:
 
 ```bash
 python -m pip install xlsform-lint

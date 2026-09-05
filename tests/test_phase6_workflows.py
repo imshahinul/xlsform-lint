@@ -30,12 +30,14 @@ def test_release_workflow_uses_manual_trusted_publishing() -> None:
     assert "pip install -e" not in workflow
 
 
-def test_documented_public_install_is_marked_as_future() -> None:
+def test_documented_public_install_is_current() -> None:
     readme = (ROOT / "README.md").read_text()
     actions = (ROOT / "docs/github-actions.md").read_text()
 
-    assert "After the first public package release" in readme
-    assert "After the first public package release" in actions
-    assert "https://github.com/imshahinul/xlsform-lint" in (
-        ROOT / "docs/pre-commit.md"
-    ).read_text()
+    assert "Install the current public release from PyPI" in readme
+    assert "install the current public release from PyPI" in actions
+    pre_commit = (ROOT / "docs/pre-commit.md").read_text()
+    assert "https://github.com/imshahinul/xlsform-lint" in pre_commit
+    assert "rev: v0.1.1" in pre_commit
+    assert "OWNER" not in pre_commit
+    assert "REVISION" not in pre_commit

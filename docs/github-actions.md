@@ -1,9 +1,7 @@
 # GitHub Actions
 
 No dedicated GitHub Action is required. Use a supported Python and invoke the
-installed console script. Version 0.1.0 is prepared for the first public release
-but is not published yet, so a workflow in a checkout can install the local
-package:
+installed console script. A workflow in a checkout can install the local package:
 
 ```yaml
 - uses: actions/setup-python@v5
@@ -17,7 +15,7 @@ package:
   run: xlsform-lint forms/main.xlsx --fail-on warning
 ```
 
-After the first public package release, replace the local install step with:
+To install the current public release from PyPI instead, use:
 
 ```yaml
 - name: Install XLSForm Lint

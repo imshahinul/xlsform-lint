@@ -5,13 +5,12 @@ whose names end in `.xlsx` and never modifies them. Each filename supplied by
 pre-commit is linted once in the supplied order; the hook returns the strongest
 exit class encountered (`3 > 2 > 1 > 0`).
 
-The project does not have a configured public remote. After the repository is
-published, replace the explicit `OWNER` placeholder and `REVISION` placeholder:
+Use the public repository and the released tag for this patch release:
 
 ```yaml
 repos:
   - repo: https://github.com/imshahinul/xlsform-lint
-    rev: REVISION                                # released tag or commit
+    rev: v0.1.1
     hooks:
       - id: xlsform-lint
 ```
