@@ -1,4 +1,4 @@
-"""Minimal read-once Phase 1 lint orchestration."""
+"""Read-once orchestration for independent native and pyxform lanes."""
 
 from __future__ import annotations
 
@@ -8,8 +8,9 @@ from zipfile import BadZipFile
 from openpyxl.utils.exceptions import InvalidFileException
 
 from .diagnostics import Diagnostic, sort_diagnostics
+from .native_model import build_native_model
+from .native_rules import run_native_rules
 from .pyxform_adapter import validate_workbook
-from .source_reader import read_sheet_names
 from .workbook_input import read_workbook_bytes
 
 
@@ -30,9 +31,11 @@ def lint_workbook(path: str | Path) -> tuple[Diagnostic, ...]:
 
     try:
         workbook_bytes = read_workbook_bytes(input_path)
-        read_sheet_names(workbook_bytes)
+        native_model = build_native_model(workbook_bytes)
     except (OSError, BadZipFile, InvalidFileException, KeyError, ValueError) as error:
         raise InputError(f"unable to read XLSX input: {input_path}") from error
 
-    diagnostic = validate_workbook(workbook_bytes, str(input_path))
-    return sort_diagnostics(()) if diagnostic is None else sort_diagnostics((diagnostic,))
+    native_diagnostics = run_native_rules(native_model, str(input_path))
+    pyxform_diagnostic = validate_workbook(workbook_bytes, str(input_path))
+    combined = native_diagnostics + (() if pyxform_diagnostic is None else (pyxform_diagnostic,))
+    return sort_diagnostics(combined)

@@ -47,4 +47,6 @@ def format_diagnostics(diagnostics: Iterable[Diagnostic]) -> str:
         f"{summary.errors} {_plural(summary.errors, 'error')}, "
         f"{summary.warnings} {_plural(summary.warnings, 'warning')}"
     )
+    if summary.info:
+        summary_text += f", {summary.info} info"
     return "\n\n".join((*blocks, summary_text)) + "\n"
