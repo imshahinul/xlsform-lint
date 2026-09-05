@@ -1,4 +1,4 @@
-name: Build and verify distributions
+name: Publish distributions to PyPI
 
 on:
   workflow_dispatch:
@@ -10,7 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out the exact selected ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -21,10 +24,38 @@ jobs:
         run: python -m pytest -q
       - name: Build wheel and sdist
         run: python -m build
-      - name: Inspect artifact archives
+      - name: Verify archive contents and package metadata
         run: |
           python -m zipfile --list dist/*.whl
           python -m tarfile --list dist/*.tar.gz
+          python - <<'PY'
+          import email
+          import glob
+          import pathlib
+          import tarfile
+          import zipfile
+
+          wheels = glob.glob("dist/*.whl")
+          sdists = glob.glob("dist/*.tar.gz")
+          assert len(wheels) == 1, wheels
+          assert len(sdists) == 1, sdists
+
+          with zipfile.ZipFile(wheels[0]) as archive:
+              names = archive.namelist()
+              metadata_name = next(name for name in names if name.endswith(".dist-info/METADATA"))
+              metadata = email.message_from_bytes(archive.read(metadata_name))
+              assert "xlsform_lint/__init__.py" in names
+              assert metadata["Name"] == "xlsform-lint"
+              assert metadata["Version"] == "0.1.0"
+              assert metadata["License-Expression"] == "Apache-2.0"
+
+          with tarfile.open(sdists[0], "r:gz") as archive:
+              names = archive.getnames()
+              root = pathlib.PurePosixPath(names[0]).parts[0]
+              assert f"{root}/LICENSE" in names
+              assert f"{root}/pyproject.toml" in names
+              assert f"{root}/src/xlsform_lint/__init__.py" in names
+          PY
       - name: Smoke-test the built wheel outside the checkout
         run: |
           python -m venv /tmp/xlsform-lint-wheel-smoke
@@ -41,3 +72,22 @@ jobs:
           name: python-distributions
           path: dist/
           if-no-files-found: error
+
+  publish:
+    name: Publish distributions to production PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+    permissions:
+      id-token: write
+    steps:
+      - name: Download verified distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/
+      - name: Publish exact verified distributions
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/

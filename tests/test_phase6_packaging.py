@@ -17,6 +17,10 @@ def test_packaging_contract_and_version_boundary() -> None:
     assert project["requires-python"] == ">=3.11"
     assert project["dependencies"] == ["pyxform>=4.5,<4.6", "openpyxl==3.1.5"]
     assert project["scripts"] == {"xlsform-lint": "xlsform_lint.cli:main"}
+    assert project["urls"] == {
+        "Repository": "https://github.com/imshahinul/xlsform-lint",
+        "Issues": "https://github.com/imshahinul/xlsform-lint/issues",
+    }
 
 
 def test_runtime_does_not_depend_on_repository_schema() -> None:

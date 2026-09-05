@@ -10,7 +10,7 @@ published, replace the explicit `OWNER` placeholder and `REVISION` placeholder:
 
 ```yaml
 repos:
-  - repo: https://github.com/OWNER/xlsform-lint  # example placeholder
+  - repo: https://github.com/imshahinul/xlsform-lint
     rev: REVISION                                # released tag or commit
     hooks:
       - id: xlsform-lint

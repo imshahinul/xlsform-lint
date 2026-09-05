@@ -86,17 +86,23 @@ def test_documented_rule_ids_and_references_are_complete() -> None:
         assert f"]({target})" in readme
 
 
-def test_release_workflow_is_manual_build_only_and_non_publishing() -> None:
+def test_release_workflow_is_manual_oidc_trusted_publishing() -> None:
     workflow = (ROOT / ".github" / "workflows" / "release.yml").read_text(encoding="utf-8")
     lowered = workflow.casefold()
     assert "workflow_dispatch:" in workflow
     assert "python -m pytest -q" in workflow
-    assert "python -m build" in workflow
+    assert workflow.count("python -m build") == 1
     assert "pip install dist/*.whl" in workflow
     assert "actions/upload-artifact@" in workflow
-    assert "pypi" not in lowered and "testpypi" not in lowered
+    assert "actions/download-artifact@" in workflow
+    assert "environment:\n      name: pypi" in workflow
+    assert "id-token: write" in workflow
+    assert "pypa/gh-action-pypi-publish@release/v1" in workflow
+    assert "testpypi" not in lowered
     assert "git tag" not in lowered
     assert "secrets." not in lowered
+    assert "password:" not in lowered
+    assert "username:" not in lowered
 
 
 def test_runtime_has_no_forbidden_execution_or_mutation_boundaries() -> None:
