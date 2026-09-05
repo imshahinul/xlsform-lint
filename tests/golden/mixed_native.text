@@ -1,0 +1,7 @@
+mixed_native.xlsx:Survey:2:constraint
+UX001 warning constraint-without-message: constraint is set but constraint_message is empty.
+
+mixed_native.xlsx:Survey:2:required
+UX002 info required-with-default: required question also has a default value; confirm that the default is intentional.
+
+0 errors, 1 warning, 1 info

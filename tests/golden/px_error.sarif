@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "xlsform-lint",
+          "rules": [
+            {
+              "id": "PX002",
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "UX001",
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "UX001",
+          "level": "warning",
+          "message": {
+            "text": "constraint-without-message: constraint is set but constraint_message is empty."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "px_error.xlsx"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "origin": "native",
+            "workbookSheet": "Survey",
+            "workbookColumn": "constraint",
+            "workbookCell": "D2",
+            "locationConfidence": "exact"
+          }
+        },
+        {
+          "ruleId": "PX002",
+          "level": "error",
+          "message": {
+            "text": "invalid-survey-name: '1bad' is not a valid XLSForm field name."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "px_error.xlsx"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "origin": "pyxform",
+            "workbookSheet": "Survey",
+            "workbookColumn": "name",
+            "workbookCell": "B2",
+            "locationConfidence": "exact"
+          }
+        }
+      ]
+    }
+  ]
+}

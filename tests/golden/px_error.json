@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "file": "px_error.xlsx",
+  "diagnostics": [
+    {
+      "rule_id": "UX001",
+      "severity": "warning",
+      "message": "constraint-without-message: constraint is set but constraint_message is empty.",
+      "origin": "native",
+      "location": {
+        "sheet": "Survey",
+        "row": 2,
+        "column": "constraint",
+        "cell": "D2",
+        "confidence": "exact"
+      },
+      "help": null,
+      "related": []
+    },
+    {
+      "rule_id": "PX002",
+      "severity": "error",
+      "message": "invalid-survey-name: '1bad' is not a valid XLSForm field name.",
+      "origin": "pyxform",
+      "location": {
+        "sheet": "Survey",
+        "row": 2,
+        "column": "name",
+        "cell": "B2",
+        "confidence": "exact"
+      },
+      "help": null,
+      "related": []
+    }
+  ],
+  "summary": {
+    "errors": 1,
+    "warnings": 1,
+    "info": 0
+  }
+}

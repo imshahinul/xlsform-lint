@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "xlsform-lint JSON output version 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "file", "diagnostics", "summary"],
+  "properties": {
+    "version": {"const": 1},
+    "file": {"type": "string", "minLength": 1},
+    "diagnostics": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/diagnostic"}
+    },
+    "summary": {"$ref": "#/$defs/summary"}
+  },
+  "$defs": {
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sheet", "row", "column", "cell", "confidence"],
+      "properties": {
+        "sheet": {"type": ["string", "null"]},
+        "row": {"type": ["integer", "null"], "minimum": 1},
+        "column": {"type": ["string", "null"]},
+        "cell": {"type": ["string", "null"]},
+        "confidence": {"enum": ["exact", "row", "sheet", "file"]}
+      },
+      "allOf": [
+        {"if": {"properties": {"confidence": {"const": "file"}}}, "then": {"properties": {"sheet": {"type": "null"}, "row": {"type": "null"}, "column": {"type": "null"}, "cell": {"type": "null"}}}},
+        {"if": {"properties": {"confidence": {"const": "sheet"}}}, "then": {"properties": {"sheet": {"type": "string", "minLength": 1}, "row": {"type": "null"}, "column": {"type": "null"}, "cell": {"type": "null"}}}},
+        {"if": {"properties": {"confidence": {"const": "row"}}}, "then": {"properties": {"sheet": {"type": "string", "minLength": 1}, "row": {"type": "integer", "minimum": 1}, "column": {"type": "null"}, "cell": {"type": "null"}}}},
+        {"if": {"properties": {"confidence": {"const": "exact"}}}, "then": {"properties": {"sheet": {"type": "string", "minLength": 1}, "row": {"type": "integer", "minimum": 1}}, "anyOf": [{"properties": {"column": {"type": "string", "minLength": 1}}}, {"properties": {"cell": {"type": "string", "minLength": 1}}}]}}
+      ]
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "severity", "message", "origin", "location", "help", "related"],
+      "properties": {
+        "rule_id": {"type": "string", "minLength": 1},
+        "severity": {"enum": ["error", "warning", "info"]},
+        "message": {"type": "string", "minLength": 1},
+        "origin": {"enum": ["pyxform", "native"]},
+        "location": {"oneOf": [{"$ref": "#/$defs/location"}, {"type": "null"}]},
+        "help": {"type": ["string", "null"]},
+        "related": {"type": "array", "items": {"$ref": "#/$defs/location"}}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["errors", "warnings", "info"],
+      "properties": {
+        "errors": {"type": "integer", "minimum": 0},
+        "warnings": {"type": "integer", "minimum": 0},
+        "info": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

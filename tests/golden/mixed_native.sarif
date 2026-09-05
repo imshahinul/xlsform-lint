@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "xlsform-lint",
+          "rules": [
+            {
+              "id": "UX001",
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "UX002",
+              "defaultConfiguration": {
+                "level": "note"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "UX001",
+          "level": "warning",
+          "message": {
+            "text": "constraint-without-message: constraint is set but constraint_message is empty."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mixed_native.xlsx"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "origin": "native",
+            "workbookSheet": "Survey",
+            "workbookColumn": "constraint",
+            "workbookCell": "D2",
+            "locationConfidence": "exact"
+          }
+        },
+        {
+          "ruleId": "UX002",
+          "level": "note",
+          "message": {
+            "text": "required-with-default: required question also has a default value; confirm that the default is intentional."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "mixed_native.xlsx"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "origin": "native",
+            "workbookSheet": "Survey",
+            "workbookColumn": "required",
+            "workbookCell": "E2",
+            "locationConfidence": "exact"
+          }
+        }
+      ]
+    }
+  ]
+}

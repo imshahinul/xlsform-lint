@@ -36,6 +36,7 @@ class CliPolicyOptions:
     fail_on: str | None = None
     include: tuple[str, ...] | None = None
     ignore: tuple[str, ...] | None = None
+    output_format: str | None = None
 
 
 @dataclass(frozen=True)
@@ -46,6 +47,7 @@ class EffectivePolicy:
     fail_on: Severity
     native_severities: Mapping[str, Severity | None]
     enabled_rule_ids: frozenset[str]
+    output_format: str
 
 
 def expand_selectors(selectors: tuple[str, ...]) -> tuple[str, ...]:
@@ -86,6 +88,7 @@ def resolve_policy(config: ConfigSettings, cli: CliPolicyOptions) -> EffectivePo
         fail_on=fail_on,
         native_severities=MappingProxyType(native),
         enabled_rule_ids=frozenset(enabled),
+        output_format=cli.output_format or config.output_format or "text",
     )
 
 

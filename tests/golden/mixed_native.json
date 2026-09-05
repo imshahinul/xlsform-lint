@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "file": "mixed_native.xlsx",
+  "diagnostics": [
+    {
+      "rule_id": "UX001",
+      "severity": "warning",
+      "message": "constraint-without-message: constraint is set but constraint_message is empty.",
+      "origin": "native",
+      "location": {
+        "sheet": "Survey",
+        "row": 2,
+        "column": "constraint",
+        "cell": "D2",
+        "confidence": "exact"
+      },
+      "help": null,
+      "related": []
+    },
+    {
+      "rule_id": "UX002",
+      "severity": "info",
+      "message": "required-with-default: required question also has a default value; confirm that the default is intentional.",
+      "origin": "native",
+      "location": {
+        "sheet": "Survey",
+        "row": 2,
+        "column": "required",
+        "cell": "E2",
+        "confidence": "exact"
+      },
+      "help": null,
+      "related": []
+    }
+  ],
+  "summary": {
+    "errors": 0,
+    "warnings": 1,
+    "info": 1
+  }
+}

@@ -10,6 +10,7 @@ import tomllib
 CONFIG_FILENAME = ".xlsform-lint.toml"
 PROFILE_NAMES = frozenset({"default", "strict"})
 FAIL_ON_VALUES = frozenset({"error", "warning", "info"})
+FORMAT_VALUES = frozenset({"text", "json", "sarif"})
 NATIVE_SEVERITY_VALUES = frozenset({"error", "warning", "info", "off"})
 SELECTOR_PREFIXES = frozenset({"PX", "CHO", "LBL", "I18N", "UX", "ORD"})
 
@@ -54,6 +55,7 @@ class ConfigSettings:
     rule_overrides: tuple[tuple[str, str], ...] = ()
     include: tuple[str, ...] | None = None
     ignore: tuple[str, ...] | None = None
+    output_format: str | None = None
     path: Path | None = None
 
 
@@ -133,8 +135,9 @@ def load_config(path: Path) -> ConfigSettings:
     fail_on = None
     if "fail_on" in lint:
         fail_on = _string(lint["fail_on"], "lint.fail_on", FAIL_ON_VALUES)
-    if "format" in lint and lint["format"] != "text":
-        raise ConfigError("lint.format must be text in Phase 4")
+    output_format = None
+    if "format" in lint:
+        output_format = _string(lint["format"], "lint.format", FORMAT_VALUES)
 
     rules = data.get("rules", {})
     if not isinstance(rules, dict):
@@ -154,7 +157,15 @@ def load_config(path: Path) -> ConfigSettings:
     _expect_keys(select, {"include", "ignore"}, "select")
     include = validate_selectors(select["include"], "select.include") if "include" in select else None
     ignore = validate_selectors(select["ignore"], "select.ignore") if "ignore" in select else None
-    return ConfigSettings(profile, fail_on, tuple(overrides), include, ignore, path)
+    return ConfigSettings(
+        profile=profile,
+        fail_on=fail_on,
+        rule_overrides=tuple(overrides),
+        include=include,
+        ignore=ignore,
+        output_format=output_format,
+        path=path,
+    )
 
 
 def load_config_for(workbook: str | Path, explicit_path: str | Path | None) -> ConfigSettings:

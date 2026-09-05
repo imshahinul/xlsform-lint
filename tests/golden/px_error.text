@@ -1,0 +1,7 @@
+px_error.xlsx:Survey:2:constraint
+UX001 warning constraint-without-message: constraint is set but constraint_message is empty.
+
+px_error.xlsx:Survey:2:name
+PX002 error invalid-survey-name: '1bad' is not a valid XLSForm field name.
+
+1 error, 1 warning
