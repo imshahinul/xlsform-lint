@@ -32,6 +32,8 @@ The wheel exposes only the `xlsform-lint` console command. Normal lint runs are
 local and network-free. Installation may contact a package index to obtain the
 declared dependencies: `pyxform>=4.5,<4.6` and `openpyxl==3.1.5`.
 
+The package is licensed under the [Apache License 2.0](../LICENSE).
+
 Configuration belongs in `.xlsform-lint.toml` beside a workbook or in a parent
 directory. For example:
 
