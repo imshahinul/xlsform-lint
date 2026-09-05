@@ -1,0 +1,43 @@
+name: Build and verify distributions
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install test and build tools
+        run: python -m pip install --upgrade pip '.[dev]'
+      - name: Run tests
+        run: python -m pytest -q
+      - name: Build wheel and sdist
+        run: python -m build
+      - name: Inspect artifact archives
+        run: |
+          python -m zipfile --list dist/*.whl
+          python -m tarfile --list dist/*.tar.gz
+      - name: Smoke-test the built wheel outside the checkout
+        run: |
+          python -m venv /tmp/xlsform-lint-wheel-smoke
+          /tmp/xlsform-lint-wheel-smoke/bin/python -m pip install dist/*.whl
+          mkdir -p /tmp/xlsform-lint-smoke-work
+          cd /tmp/xlsform-lint-smoke-work
+          /tmp/xlsform-lint-wheel-smoke/bin/python -c "from openpyxl import Workbook; w=Workbook(); s=w.active; s.title='survey'; s.append(('type','name','label')); s.append(('text','name','Name')); t=w.create_sheet('settings'); t.append(('form_title','form_id','version')); t.append(('Smoke','smoke','1')); w.save('smoke.xlsx'); w.close()"
+          /tmp/xlsform-lint-wheel-smoke/bin/xlsform-lint --help
+          /tmp/xlsform-lint-wheel-smoke/bin/xlsform-lint smoke.xlsx
+          /tmp/xlsform-lint-wheel-smoke/bin/python -m pip check
+      - name: Upload verified distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/
+          if-no-files-found: error

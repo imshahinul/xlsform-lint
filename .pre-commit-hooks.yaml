@@ -1,0 +1,7 @@
+- id: xlsform-lint
+  name: xlsform-lint
+  description: Lint XLSForm workbooks
+  entry: python -m xlsform_lint.pre_commit
+  language: python
+  files: \.xlsx$
+  types: [file]

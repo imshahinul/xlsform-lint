@@ -17,8 +17,10 @@ xlsform-lint = "xlsform_lint.cli:main"
 
 [project.optional-dependencies]
 dev = [
+    "build>=1,<2",
     "pytest>=8",
     "jsonschema>=4,<5",
+    "pre-commit>=3,<5",
 ]
 
 [tool.setuptools.packages.find]
