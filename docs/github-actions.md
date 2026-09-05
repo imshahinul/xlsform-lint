@@ -1,8 +1,9 @@
 # GitHub Actions
 
 No dedicated GitHub Action is required. Use a supported Python and invoke the
-installed console script. The package is not published yet, so a workflow in a
-checkout can install the local package:
+installed console script. Version 0.1.0 is prepared for the first public release
+but is not published yet, so a workflow in a checkout can install the local
+package:
 
 ```yaml
 - uses: actions/setup-python@v5

@@ -13,7 +13,7 @@ def test_packaging_contract_and_version_boundary() -> None:
 
     assert data["build-system"]["build-backend"] == "setuptools.build_meta"
     assert project["name"] == "xlsform-lint"
-    assert project["version"] == "0.0.0"
+    assert project["version"] == "0.1.0"
     assert project["requires-python"] == ">=3.11"
     assert project["dependencies"] == ["pyxform>=4.5,<4.6", "openpyxl==3.1.5"]
     assert project["scripts"] == {"xlsform-lint": "xlsform_lint.cli:main"}
