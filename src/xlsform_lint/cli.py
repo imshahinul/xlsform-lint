@@ -1,4 +1,4 @@
-"""Minimal command-line interface for the Phase 1 diagnostic kernel."""
+"""Stable command-line interface with the Phase 4 policy layer."""
 
 from __future__ import annotations
 
@@ -6,14 +6,20 @@ import argparse
 import sys
 from collections.abc import Sequence
 
-from .diagnostics import exit_code_for
+from .config import ConfigError, load_config_for, parse_cli_selectors
 from .engine import InputError, lint_workbook
+from .policy import CliPolicyOptions, apply_policy, exit_code_for_policy, resolve_policy
 from .text_formatter import format_diagnostics
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="xlsform-lint")
     parser.add_argument("workbook", help="path to one XLSForm .xlsx workbook")
+    parser.add_argument("--config", metavar="PATH", help="use this configuration file only")
+    parser.add_argument("--select", metavar="RULES", help="report only comma-separated rule IDs or prefixes")
+    parser.add_argument("--ignore", metavar="RULES", help="hide comma-separated rule IDs or prefixes")
+    parser.add_argument("--profile", choices=("default", "strict"), help="select a built-in policy profile")
+    parser.add_argument("--fail-on", choices=("error", "warning", "info"), help="minimum failing severity")
     return parser
 
 
@@ -22,8 +28,17 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     args = build_parser().parse_args(argv)
     try:
-        diagnostics = lint_workbook(args.workbook)
-    except InputError as error:
+        config = load_config_for(args.workbook, args.config)
+        cli = CliPolicyOptions(
+            profile=args.profile,
+            fail_on=args.fail_on,
+            include=parse_cli_selectors(args.select, "--select") if args.select is not None else None,
+            ignore=parse_cli_selectors(args.ignore, "--ignore") if args.ignore is not None else None,
+        )
+        policy = resolve_policy(config, cli)
+        raw_diagnostics = lint_workbook(args.workbook)
+        diagnostics = apply_policy(raw_diagnostics, policy)
+    except (ConfigError, InputError) as error:
         print(f"xlsform-lint: error: {error}", file=sys.stderr)
         return 2
     except Exception:
@@ -31,4 +46,4 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 3
 
     sys.stdout.write(format_diagnostics(diagnostics))
-    return exit_code_for(diagnostics)
+    return exit_code_for_policy(raw_diagnostics, diagnostics, policy)
