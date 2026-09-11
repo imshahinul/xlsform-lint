@@ -12,8 +12,8 @@ def test_release_workflow_uses_manual_trusted_publishing() -> None:
     assert workflow.count("python -m build") == 1
     assert "dist/*.whl" in workflow
     assert "/bin/xlsform-lint" in workflow
-    assert "actions/upload-artifact@v4" in workflow
-    assert "actions/download-artifact@v4" in workflow
+    assert "actions/upload-artifact@v7" in workflow
+    assert "actions/download-artifact@v8" in workflow
     assert "workflow_dispatch:" in workflow
     assert "environment:\n      name: pypi" in workflow
     assert "id-token: write" in workflow
