@@ -185,6 +185,8 @@ def run_ux001(model: WorkbookFacts, path: str) -> tuple[Diagnostic, ...]:
     constraint_header = sheet.unique_headers["constraint"]
     findings = []
     for row in model.survey_rows:
+        if row.category is not SurveyTypeCategory.VISIBLE:
+            continue
         if is_blank(row_value(row, "constraint")):
             continue
         has_message = any(
@@ -237,6 +239,8 @@ def run_ux002(model: WorkbookFacts, path: str) -> tuple[Diagnostic, ...]:
     required_header = sheet.unique_headers["required"]
     findings = []
     for row in model.survey_rows:
+        if row.category is not SurveyTypeCategory.VISIBLE:
+            continue
         required = semantic_text(row_value(row, "required"))
         if required is not None and required.casefold() == "yes" and not is_blank(row_value(row, "default")):
             findings.append(_diagnostic(
