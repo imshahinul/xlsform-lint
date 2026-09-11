@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the exact selected ref
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.sha }}
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.11"
           cache: pip
@@ -67,7 +67,7 @@ jobs:
           /tmp/xlsform-lint-wheel-smoke/bin/xlsform-lint smoke.xlsx
           /tmp/xlsform-lint-wheel-smoke/bin/python -m pip check
       - name: Upload verified distributions
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: python-distributions
           path: dist/
@@ -83,7 +83,7 @@ jobs:
       id-token: write
     steps:
       - name: Download verified distributions
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: python-distributions
           path: dist/
