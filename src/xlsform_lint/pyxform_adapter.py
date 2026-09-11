@@ -19,33 +19,36 @@ from .diagnostics import (
 from .source_reader import SourceCell, WorkbookSourceIndex, read_source_index
 
 
-_ROW_PREFIX = r"\[row : (?P<row>\d+)\]"
+_ROW_PREFIX = r"\[row\s*:\s*(?P<row>\d+)\]"
 _PX001 = re.compile(
     _ROW_PREFIX
-    + r" On the 'survey' sheet, the 'name' value '(?P<token>[^']+)' is invalid\. "
+    + r"\s+On the 'survey' sheet, the 'name' value (?P<quote>['\"])(?P<token>.+?)(?P=quote) is invalid\.\s+"
     r"Questions, groups, and repeats must be unique within their nearest parent "
     r"group or repeat, or the survey if not inside a group or repeat\."
 )
 _PX002 = re.compile(
     _ROW_PREFIX
-    + r" On the 'survey' sheet, the 'name' value is invalid\. Names must begin "
+    + r"\s+On the 'survey' sheet, the 'name' value is invalid\.\s+Names must begin "
     r"with a letter or underscore\. After the first character, names may contain "
-    r"letters, digits, underscores, hyphens, or periods\."
+    r"letters, digits, underscores, hyphens, or periods[.!]"
 )
-_PX003_NO_NAME = re.compile(_ROW_PREFIX + r" Question or group with no name\.")
-_PX003_NO_TYPE = re.compile(_ROW_PREFIX + r" Question with no type\.\n.*", re.DOTALL)
-_PX004 = re.compile(_ROW_PREFIX + r" List name not in choices sheet: (?P<token>\S+)")
+_PX003_NO_NAME = re.compile(_ROW_PREFIX + r"\s+Question or group with no name\.")
+_PX003_NO_TYPE = re.compile(_ROW_PREFIX + r"\s+Question with no type\.(?:\s+.*)?")
+_PX004 = re.compile(
+    _ROW_PREFIX
+    + r"\s+List name not in choices sheet:\s+(?P<quote>['\"]?)(?P<token>[^'\"\s.]+)(?P=quote)\.?"
+)
 _PX005 = re.compile(
     _ROW_PREFIX
-    + r" On the 'survey' sheet, the '(?P<column>[^']+)' value is invalid\. "
+    + r"\s+On the 'survey' sheet, the '(?P<column>[^']+)' value is invalid\.\s+"
     r"Reference variables must contain a name from the 'survey' sheet\. "
-    r"Could not find the name '(?P<token>[^']+)'\."
+    r"Could not find the name (?P<quote>['\"])(?P<token>.+?)(?P=quote)[.!]"
 )
 _PX006 = re.compile(
     _ROW_PREFIX
-    + r" On the 'choices' sheet, the 'name' value is invalid\. Choice names must "
+    + r"\s+On the 'choices' sheet, the 'name' value is invalid\.\s+Choice names must "
     r"be unique for each choice list\. If this is intentional, use the setting "
-    r"'allow_choice_duplicates'\. Learn more: https://xlsform\.org/#choice-names\."
+    r"'allow_choice_duplicates'\. Learn more: https://xlsform\.org/#choice-names[.!]"
 )
 
 
@@ -55,9 +58,17 @@ def convert_workbook(workbook_bytes: bytes) -> ConvertResult:
     return convert(BytesIO(workbook_bytes), validate=False)
 
 
-def _safe_upstream_message(error: errors.PyXFormError) -> str:
+def _safe_upstream_message(error: Exception) -> str:
     message = " ".join(str(error).split())
     return message or "pyxform conversion failed."
+
+
+def _message_body(error: errors.PyXFormError) -> str:
+    """Normalize layout and discard only an explicit prefix before row context."""
+
+    message = " ".join(str(error).split())
+    row_context = message.find("[row")
+    return message[row_context:] if row_context >= 0 else message
 
 
 def suggest_field_name(
@@ -97,6 +108,32 @@ def _location(path: str, cell: SourceCell | None) -> SourceLocation:
     )
 
 
+def _best_location(
+    path: str,
+    index: WorkbookSourceIndex,
+    *,
+    sheet: str,
+    row: int,
+    column: str,
+) -> SourceLocation:
+    """Use the strongest source precision established by indexed evidence."""
+
+    cell = _single_cell(index, sheet=sheet, row=row, column=column)
+    if cell is not None:
+        return _location(path, cell)
+    row_cells = index.find(sheet=sheet, row=row)
+    if row_cells:
+        return SourceLocation(
+            path, sheet=row_cells[0].sheet, row=row, confidence=SourceConfidence.ROW
+        )
+    sheet_cells = index.find(sheet=sheet)
+    if sheet_cells:
+        return SourceLocation(
+            path, sheet=sheet_cells[0].sheet, confidence=SourceConfidence.SHEET
+        )
+    return SourceLocation(path=path, confidence=SourceConfidence.FILE)
+
+
 def _single_cell(
     index: WorkbookSourceIndex, *, sheet: str, row: int, column: str
 ) -> SourceCell | None:
@@ -119,7 +156,7 @@ def _normalize_45(
 ) -> Diagnostic | None:
     """Match only exact, reconnaissance-backed pyxform 4.5 public messages."""
 
-    raw = str(error)
+    raw = _message_body(error)
     match = _PX001.fullmatch(raw)
     if match:
         row, token = int(match["row"]), match["token"]
@@ -136,7 +173,7 @@ def _normalize_45(
             "PX001",
             Severity.ERROR,
             f"duplicate-name-in-scope: '{token}' duplicates another name in the same XLSForm scope.",
-            _location(source_path, cell),
+            _best_location(source_path, index, sheet="survey", row=row, column="name"),
             DiagnosticOrigin.PYXFORM,
             related=related,
         )
@@ -153,7 +190,7 @@ def _normalize_45(
             "PX002",
             Severity.ERROR,
             message,
-            _location(source_path, cell),
+            _best_location(source_path, index, sheet="survey", row=row, column="name"),
             DiagnosticOrigin.PYXFORM,
         )
 
@@ -196,7 +233,7 @@ def _normalize_45(
             "PX004",
             Severity.ERROR,
             f"unknown-internal-choice-list: internal choice list '{token}' does not exist.",
-            _location(source_path, cell),
+            _best_location(source_path, index, sheet="survey", row=row, column="type"),
             DiagnosticOrigin.PYXFORM,
         )
 
@@ -216,7 +253,13 @@ def _normalize_45(
             "PX005",
             Severity.ERROR,
             message,
-            _location(source_path, candidates[0] if len(candidates) == 1 else None),
+            (
+                _location(source_path, candidates[0])
+                if len(candidates) == 1
+                else _best_location(
+                    source_path, index, sheet="survey", row=row, column=column
+                )
+            ),
             DiagnosticOrigin.PYXFORM,
         )
 
@@ -246,7 +289,7 @@ def _normalize_45(
             "PX006",
             Severity.ERROR,
             message,
-            _location(source_path, cell),
+            _best_location(source_path, index, sheet="choices", row=row, column="name"),
             DiagnosticOrigin.PYXFORM,
             related=related,
         )
@@ -258,7 +301,15 @@ def validate_workbook(workbook_bytes: bytes, source_path: str) -> Diagnostic | N
 
     try:
         convert_workbook(workbook_bytes)
-    except errors.PyXFormError as error:
+    except Exception as error:
+        if not isinstance(error, errors.PyXFormError):
+            return Diagnostic(
+                rule_id="PX999",
+                severity=Severity.ERROR,
+                message=f"pyxform-error: {_safe_upstream_message(error)}",
+                source=SourceLocation(path=source_path, confidence=SourceConfidence.FILE),
+                origin=DiagnosticOrigin.PYXFORM,
+            )
         index = read_source_index(workbook_bytes)
         recognized = _normalize_45(error, source_path, index)
         if recognized is not None:
