@@ -49,10 +49,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         print("xlsform-lint: internal error", file=sys.stderr)
         return 3
 
-    formatters = {
-        "text": lambda: format_diagnostics(diagnostics),
-        "json": lambda: format_json(args.workbook, diagnostics),
-        "sarif": lambda: format_sarif(args.workbook, diagnostics),
-    }
-    sys.stdout.write(formatters[policy.output_format]())
-    return exit_code_for_policy(raw_diagnostics, diagnostics, policy)
+    try:
+        formatters = {
+            "text": lambda: format_diagnostics(diagnostics),
+            "json": lambda: format_json(args.workbook, diagnostics),
+            "sarif": lambda: format_sarif(args.workbook, diagnostics),
+        }
+        rendered = formatters[policy.output_format]()
+        exit_code = exit_code_for_policy(raw_diagnostics, diagnostics, policy)
+        sys.stdout.write(rendered)
+    except Exception:
+        print("xlsform-lint: internal error", file=sys.stderr)
+        return 3
+    return exit_code
