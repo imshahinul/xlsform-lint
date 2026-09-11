@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "license": "Apache-2.0",
+  "provenance": "synthetic/minimized; no private forms, participant data, or third-party instruments",
+  "fixtures": [
+    {"path":"valid/basic_clean.xlsx","category":"valid","purpose":"Minimal clean control","constructs":["basic"],"pyxform_accept":true,"clean":true,"expected_rule_ids":[]},
+    {"path":"valid/nested_groups.xlsx","category":"valid","purpose":"Nested group scopes","constructs":["groups","nested_groups","required"],"pyxform_accept":true,"clean":true,"expected_rule_ids":[]},
+    {"path":"valid/repeat_interaction.xlsx","category":"valid","purpose":"Group, repeat, and nested interaction","constructs":["groups","repeats","nested_group_repeat","constraints","constraint_messages","required"],"pyxform_accept":true,"clean":true,"expected_rule_ids":[]},
+    {"path":"valid/selects_and_filter.xlsx","category":"valid","purpose":"Static select types and earlier-field filtering","constructs":["select_one","select_multiple","multiple_choice_lists","choice_filter","earlier_field_choice_filter"],"pyxform_accept":true,"clean":true,"expected_rule_ids":[]},
+    {"path":"valid/multilingual_constraints.xlsx","category":"valid","purpose":"Complete translated labels and messages","constructs":["translations","multiple_label_languages","constraints","constraint_messages","required"],"pyxform_accept":true,"clean":true,"expected_rule_ids":[]},
+    {"path":"valid/logic_and_internal.xlsx","category":"valid","purpose":"Expressions and non-visible fields","constructs":["relevance","calculates","notes","hidden_internal","defaults"],"pyxform_accept":true,"clean":true,"expected_rule_ids":[]},
+    {"path":"valid/required_and_defaults.xlsx","category":"valid","purpose":"Required fields and non-conflicting defaults","constructs":["required","defaults"],"pyxform_accept":true,"clean":true,"expected_rule_ids":[]},
+    {"path":"valid/large_choice_list.xlsx","category":"valid","purpose":"Realistic 250-item static choice list","constructs":["select_one","large_static_choice_list"],"pyxform_accept":true,"clean":true,"expected_rule_ids":[]},
+    {"path":"valid/complex_combined.xlsx","category":"valid","purpose":"Mixed legitimate constructs in one workbook","constructs":["mixed_legitimate","groups","repeats","select_one","select_multiple","choice_filter","translations","constraints","constraint_messages","relevance","calculates","notes","required","defaults"],"pyxform_accept":true,"clean":true,"expected_rule_ids":[]},
+    {"path":"findings/mixed_native_findings.xlsx","category":"findings","purpose":"Mixed intentional native diagnostics","constructs":["mixed_intentional_findings"],"pyxform_accept":true,"clean":false,"expected_rule_ids":["CHO001","LBL001","LBL002","I18N001","UX001","ORD001","UX002"]},
+    {"path":"findings/duplicate_choice.xlsx","category":"findings","purpose":"Recognized pyxform duplicate choice diagnostic","constructs":["select_one","duplicate_choice"],"pyxform_accept":false,"clean":false,"expected_rule_ids":["PX006"]},
+    {"path":"malformed/unmatched_end_group.xlsx","category":"malformed","purpose":"Unmatched structural terminator","constructs":["malformed_structure"],"pyxform_accept":false,"clean":false,"expected_rule_ids":["PX999"]},
+    {"path":"malformed/unknown_choice_list.xlsx","category":"malformed","purpose":"Reference to absent internal choice list","constructs":["semantic_failure","select_one"],"pyxform_accept":false,"clean":false,"expected_rule_ids":["PX004"]}
+  ]
+}
