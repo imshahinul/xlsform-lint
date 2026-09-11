@@ -46,7 +46,7 @@ jobs:
               metadata = email.message_from_bytes(archive.read(metadata_name))
               assert "xlsform_lint/__init__.py" in names
               assert metadata["Name"] == "xlsform-lint"
-              assert metadata["Version"] == "0.1.1"
+              assert metadata["Version"] == "0.2.0"
               assert metadata["License-Expression"] == "Apache-2.0"
 
           with tarfile.open(sdists[0], "r:gz") as archive:

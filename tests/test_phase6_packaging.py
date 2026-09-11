@@ -17,7 +17,7 @@ def test_packaging_contract_and_version_boundary() -> None:
 
     assert data["build-system"]["build-backend"] == "setuptools.build_meta"
     assert project["name"] == "xlsform-lint"
-    assert project["version"] == "0.1.1"
+    assert project["version"] == "0.2.0"
     assert project["description"] == (
         "A Ruff/ESLint-style linter for XLSForm, built on pyxform."
     )
@@ -41,14 +41,14 @@ def test_built_wheel_contains_long_description_metadata(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
     )
-    wheel = next(tmp_path.glob("xlsform_lint-0.1.1-*.whl"))
+    wheel = next(tmp_path.glob("xlsform_lint-0.2.0-*.whl"))
     with zipfile.ZipFile(wheel) as archive:
         metadata_name = next(
             name for name in archive.namelist() if name.endswith(".dist-info/METADATA")
         )
         metadata = email.message_from_bytes(archive.read(metadata_name))
 
-    assert metadata["Version"] == "0.1.1"
+    assert metadata["Version"] == "0.2.0"
     assert metadata["Summary"] == (
         "A Ruff/ESLint-style linter for XLSForm, built on pyxform."
     )
