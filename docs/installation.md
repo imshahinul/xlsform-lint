@@ -2,7 +2,7 @@
 
 ## Public release
 
-Version 0.1.0 is published on PyPI. Install the current public release in a
+Version 0.1.1 is published on PyPI. Install the current public release in a
 Python 3.11-or-newer environment with:
 
 ```bash

@@ -43,3 +43,21 @@ jobs:
         run: python -m pip install --upgrade pip '.[dev]'
       - name: Run tests
         run: python -m pytest -q
+
+  distribution:
+    name: Built distribution smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install build tool
+        run: python -m pip install --upgrade pip 'build>=1,<2'
+      - name: Build wheel and sdist
+        run: python -m build --outdir "$RUNNER_TEMP/xlsform-lint-dist"
+      - name: Qualify clean wheel and sdist installations
+        run: python scripts/qualify_distribution.py "$RUNNER_TEMP/xlsform-lint-dist"
