@@ -192,24 +192,10 @@
       ],
       "expected_pyxform_acceptance": true,
       "actual_pyxform_outcome": "ACCEPTED",
-      "expected_rule_counts": {
-        "UX001": 2,
-        "LBL002": 2
-      },
+      "expected_rule_counts": {},
       "px999_explanation": null,
       "crash_or_internal_failure": false,
-      "adjudication": {
-        "UX001": {
-          "classification": "CONFIRMED_FALSE_POSITIVE",
-          "confidence": "HIGH",
-          "rationale": "Both rows use bind:jr:constraintMsg; frozen UX001 does not recognize this supported alternate constraint-message header."
-        },
-        "LBL002": {
-          "classification": "CONFIRMED_FALSE_POSITIVE",
-          "confidence": "HIGH",
-          "rationale": "Both choices intentionally use image media as their visible choice content."
-        }
-      },
+      "adjudication": {},
       "notes": ""
     },
     {
@@ -246,9 +232,7 @@
       "actual_pyxform_outcome": "ACCEPTED",
       "expected_rule_counts": {
         "I18N001": 35,
-        "LBL001": 1,
-        "UX001": 1,
-        "LBL002": 2
+        "UX001": 1
       },
       "px999_explanation": null,
       "crash_or_internal_failure": false,
@@ -258,20 +242,10 @@
           "confidence": "HIGH",
           "rationale": "A populated label language is paired with a blank declared label language."
         },
-        "LBL001": {
-          "classification": "CONFIRMED_FALSE_POSITIVE",
-          "confidence": "HIGH",
-          "rationale": "The note intentionally displays image media instead of text."
-        },
         "UX001": {
           "classification": "CONFIRMED_TRUE_POSITIVE",
           "confidence": "HIGH",
           "rationale": "A constraint is present without a recognized constraint message."
-        },
-        "LBL002": {
-          "classification": "CONFIRMED_FALSE_POSITIVE",
-          "confidence": "HIGH",
-          "rationale": "The two choices intentionally use image media instead of text."
         }
       },
       "notes": ""

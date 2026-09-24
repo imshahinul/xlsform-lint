@@ -92,9 +92,11 @@ but a hidden fatal PX result still exits 1.
 ### LBL001 — Missing visible-question label
 
 - **Origin/default:** native; warning.
-- **Purpose/bad:** report a visible question or note whose label is blank.
-- **Valid/exception:** a populated label; calculate, hidden, metadata, containers,
-  and unknown types are not label-bearing for this rule.
+- **Purpose/bad:** report a visible question or note whose textual label and
+  supported visible media are blank.
+- **Valid/exception:** a populated label or standard image/audio/video media;
+  calculate, hidden, metadata, containers, and unknown types are not
+  label-bearing for this rule.
 - **Safeguard:** translated label columns take precedence and ambiguous headers
   suppress dependent checks.
 - **Configuration/source:** configurable/selectable; exact label cell.
@@ -102,9 +104,10 @@ but a hidden fatal PX result still exits 1.
 ### LBL002 — Blank choice label
 
 - **Origin/default:** native; warning.
-- **Purpose/bad:** report a named choice with no label.
-- **Valid/exception:** a populated label; blank structural rows and choices
-  without a name are ignored.
+- **Purpose/bad:** report a named choice with no textual label or supported
+  visible media.
+- **Valid/exception:** a populated label or standard image/audio/video media;
+  blank structural rows and choices without a name are ignored.
 - **Safeguard:** translated labels take precedence; ambiguous headers suppress
   dependent checks.
 - **Configuration/source:** configurable/selectable; exact label cell.
@@ -123,8 +126,8 @@ but a hidden fatal PX result still exits 1.
 ### UX001 — Constraint without message
 
 - **Origin/default:** native; warning.
-- **Purpose/bad:** report a nonblank `constraint` with no populated plain or
-  translated `constraint_message`.
+- **Purpose/bad:** report a nonblank `constraint` with no populated plain,
+  translated, or `bind:jr:constraintMsg` constraint message.
 - **Valid/exception:** any corresponding message is populated, or no constraint.
 - **Safeguard:** ambiguous message headers suppress the check.
 - **Configuration/source:** configurable/selectable; exact constraint cell.
