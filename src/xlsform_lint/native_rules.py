@@ -30,6 +30,9 @@ from .native_model import (
 
 _REFERENCE = re.compile(r"\$\{(?P<name>[^{}]+)\}")
 _LABEL_BEARING = {SurveyTypeCategory.VISIBLE, SurveyTypeCategory.NOTE}
+_VISIBLE_MEDIA_HEADER = re.compile(
+    r"^(?:media::)?(?:image|audio|video)(?:::.+)?$", re.IGNORECASE
+)
 
 
 def _location(path: str, sheet: SheetFacts, row: int, header: HeaderCell) -> SourceLocation:
@@ -80,6 +83,15 @@ def _label_state(row: SurveyRow | ChoiceRow) -> tuple[str, tuple[tuple[Any, Head
     return "plain", ((value, header, ""),)
 
 
+def _has_visible_media(row: SurveyRow | ChoiceRow) -> bool:
+    return any(
+        _VISIBLE_MEDIA_HEADER.fullmatch(header.actual.strip())
+        and header.index < len(row.values)
+        and not is_blank(row.values[header.index])
+        for header in row.sheet.headers
+    )
+
+
 def run_cho001(model: WorkbookFacts, path: str) -> tuple[Diagnostic, ...]:
     sheet = model.choices_sheet
     if sheet is None or "list_name" not in sheet.unique_headers:
@@ -113,7 +125,7 @@ def run_lbl001(model: WorkbookFacts, path: str) -> tuple[Diagnostic, ...]:
         if state is None:
             continue
         _, labels = state
-        if all(is_blank(value) for value, _, _ in labels):
+        if all(is_blank(value) for value, _, _ in labels) and not _has_visible_media(row):
             name = semantic_text(row_value(row, "name")) or "<unnamed>"
             findings.append(_diagnostic(
                 "LBL001", Severity.WARNING,
@@ -133,7 +145,7 @@ def run_lbl002(model: WorkbookFacts, path: str) -> tuple[Diagnostic, ...]:
         if state is None:
             continue
         _, labels = state
-        if all(is_blank(value) for value, _, _ in labels):
+        if all(is_blank(value) for value, _, _ in labels) and not _has_visible_media(row):
             list_name = semantic_text(row_value(row, "list_name")) or "<unknown>"
             findings.append(_diagnostic(
                 "LBL002", Severity.WARNING,
@@ -178,7 +190,11 @@ def run_ux001(model: WorkbookFacts, path: str) -> tuple[Diagnostic, ...]:
         return ()
     message_headers = tuple(
         header for header in sheet.headers
-        if header.logical == "constraint_message" or header.logical.startswith("constraint_message::")
+        if (
+            header.logical == "constraint_message"
+            or header.logical.startswith("constraint_message::")
+            or header.logical == "bind:jr:constraintmsg"
+        )
     )
     if len({header.logical for header in message_headers}) != len(message_headers):
         return ()

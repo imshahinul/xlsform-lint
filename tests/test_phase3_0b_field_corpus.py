@@ -58,13 +58,12 @@ def test_construct_coverage_is_field_diverse():
 def test_committed_field_harness_replays_all_oracles_and_adjudicates_every_finding():
     report = validate()
     assert report["forms_executed"] == 17
-    assert report["diagnostics"] == 48
+    assert report["diagnostics"] == 41
     assert report["rule_counts"] == {
-        "I18N001": 37, "LBL001": 2, "LBL002": 4, "PX004": 1, "PX999": 1, "UX001": 3
+        "I18N001": 37, "LBL001": 1, "PX004": 1, "PX999": 1, "UX001": 1
     }
     assert sum(report["adjudication_counts"].values()) == report["diagnostics"]
     assert report["adjudication_counts"] == {
-        "CONFIRMED_FALSE_POSITIVE": 7,
         "CONFIRMED_TRUE_POSITIVE": 39,
         "EXPECTED_PYXFORM": 1,
         "PX999_EXPLAINED": 1,

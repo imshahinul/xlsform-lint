@@ -90,6 +90,30 @@ def test_lbl001_type_and_translation_matrix(tmp_path, xlsform_factory):
     assert _rules(multilingual).count("LBL001") == 1
 
 
+def test_lbl001_media_visibility_boundary(tmp_path, xlsform_factory):
+    path = xlsform_factory(
+        tmp_path / "question-media.xlsx",
+        [("type", "name", "label", "image", "audio", "video", "media_like", "image_url"),
+         ("note", "missing", None, None, " ", None, "custom", "https://example.test/a.jpg"),
+         ("note", "image", None, "note.jpg", None, None, None, None),
+         ("text", "audio", None, None, "prompt.mp3", None, None, None),
+         ("text", "video", None, None, None, "prompt.mp4", None, None),
+         ("text", "labelled", "Text", None, None, None, None, None),
+         ("hidden", "internal", None, None, None, None, None, None)],
+    )
+    findings = [item for item in lint_workbook(path) if item.rule_id == "LBL001"]
+    assert [item.source.row for item in findings] == [2]
+
+
+def test_lbl001_recognizes_standard_localized_media_only(tmp_path, xlsform_factory):
+    path = xlsform_factory(
+        tmp_path / "localized-question-media.xlsx",
+        [("type", "name", "label::English", "label::French", "image::English", "media::video::French"),
+         ("note", "localized", None, None, "note.jpg", None)],
+    )
+    assert "LBL001" not in _rules(path)
+
+
 def test_lbl002_and_choice_i18n_noise_matrix(tmp_path, xlsform_factory):
     path = xlsform_factory(
         tmp_path / "choice-labels.xlsx", [("type", "name", "label"), ("text", "q", "Q")],
@@ -104,6 +128,32 @@ def test_lbl002_and_choice_i18n_noise_matrix(tmp_path, xlsform_factory):
     )
     assert _rules(multilingual).count("I18N001") == 1
     assert _rules(multilingual).count("LBL002") == 1
+
+
+def test_lbl002_media_visibility_boundary(tmp_path, xlsform_factory):
+    path = xlsform_factory(
+        tmp_path / "choice-media.xlsx", [("type", "name", "label"), ("select_one media", "q", "Q")],
+        choices_rows=[
+            ("list_name", "name", "label", "image", "audio", "video", "media_like", "image_url"),
+            ("media", "missing", None, None, " ", None, "custom", "https://example.test/a.jpg"),
+            ("media", "image", None, "choice.jpg", None, None, None, None),
+            ("media", "audio", None, None, "choice.mp3", None, None, None),
+            ("media", "video", None, None, None, "choice.mp4", None, None),
+            ("media", "labelled", "Text", None, None, None, None, None),
+            ("media", None, None, None, None, None, None, None),
+        ],
+    )
+    findings = [item for item in lint_workbook(path) if item.rule_id == "LBL002"]
+    assert [item.source.row for item in findings] == [2]
+
+
+def test_lbl002_recognizes_standard_localized_media_only(tmp_path, xlsform_factory):
+    path = xlsform_factory(
+        tmp_path / "localized-choice-media.xlsx", [("type", "name", "label"), ("select_one media", "q", "Q")],
+        choices_rows=[("list_name", "name", "label::English", "label::French", "media::image::English"),
+                      ("media", "localized", None, None, "choice.jpg")],
+    )
+    assert "LBL002" not in _rules(path)
 
 
 def test_i18n001_survey_matrix(tmp_path, xlsform_factory):
@@ -146,6 +196,29 @@ def test_ux001_matrix(tmp_path, xlsform_factory):
     )
     findings = [item for item in lint_workbook(path) if item.rule_id == "UX001"]
     assert [item.source.row for item in findings] == [2]
+
+
+def test_ux001_recognizes_exact_bind_constraint_message_header(tmp_path, xlsform_factory):
+    path = xlsform_factory(
+        tmp_path / "bind-constraint-message.xlsx",
+        [("type", "name", "label", "constraint", "bind:jr:constraintMsg"),
+         ("integer", "missing", "Missing", ". > 0", None),
+         ("integer", "blank", "Blank", ". > 0", " "),
+         ("integer", "message", "Message", ". > 0", "Positive"),
+         ("hidden", "internal", None, ". > 0", None),
+         ("note", "note", "Note", ". > 0", None)],
+    )
+    findings = [item for item in lint_workbook(path) if item.rule_id == "UX001"]
+    assert [item.source.row for item in findings] == [2, 3]
+
+
+def test_ux001_suppresses_ambiguous_alternate_message_headers(tmp_path, xlsform_factory):
+    path = xlsform_factory(
+        tmp_path / "ambiguous-bind-constraint-message.xlsx",
+        [("type", "name", "label", "constraint", "bind:jr:constraintMsg", "bind:jr:constraintMsg"),
+         ("integer", "question", "Question", ". > 0", None, None)],
+    )
+    assert "UX001" not in _rules(path)
 
 
 def test_ord001_is_choice_filter_only_and_unambiguous(tmp_path, xlsform_factory):
