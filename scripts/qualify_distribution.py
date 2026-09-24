@@ -16,7 +16,7 @@ import venv
 import zipfile
 
 
-VERSION = "0.2.0"
+VERSION = "0.2.1"
 ROOT = Path(__file__).parents[1]
 FIXTURES = ROOT / "tests" / "fixtures" / "corpus"
 EXPECTED_RULES = {

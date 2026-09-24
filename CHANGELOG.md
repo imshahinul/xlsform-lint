@@ -1,5 +1,12 @@
 # Release history
 
+## 0.2.1 — maintenance release candidate
+
+This maintenance release reduces false positives in existing native rules. UX001
+recognizes `bind:jr:constraintMsg`, and LBL001/LBL002 recognize standard
+media-only visible survey and choice content. All existing public rule IDs and
+interfaces are preserved.
+
 ## 0.2.0 — release candidate
 
 This release focuses on hardening, compatibility, and cross-platform

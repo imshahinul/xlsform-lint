@@ -7,7 +7,7 @@ authority: this tool makes selected upstream failures easier to act on and adds
 bounded authoring checks; it does not replace pyxform or XLSForm testing on the
 target data-collection platform.
 
-Version 0.1.1 is available on PyPI. Version 0.2.0 is the qualified release
+Version 0.1.1 is available on PyPI. Version 0.2.1 is the maintenance release
 candidate and has not been published.
 The project does not validate runtime XPath behavior, execute a form, load or
 validate external CSV data, or claim to find everything outside pyxform's
@@ -22,7 +22,7 @@ For a local checkout or a built wheel:
 
 ```bash
 python -m pip install .
-python -m pip install dist/xlsform_lint-0.2.0-py3-none-any.whl
+python -m pip install dist/xlsform_lint-0.2.1-py3-none-any.whl
 ```
 
 Install the current public release from PyPI with:
