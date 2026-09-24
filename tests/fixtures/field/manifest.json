@@ -1,0 +1,693 @@
+{
+  "schema": 1,
+  "product_version": "0.2.0",
+  "control_fixture_count": 13,
+  "generated_from_field_observation": true,
+  "forms": [
+    {
+      "id": "pyx-01",
+      "title": "UCL biomass plot field form",
+      "source_family": "XLSForm/pyxform",
+      "source_url": "https://github.com/XLSForm/pyxform/blob/26006d0830570ffa3caead24b0c9a470278af2cf/tests/fixtures/bug_example_forms/UCL_Biomass_Plot_Form.xlsx",
+      "revision": "26006d0830570ffa3caead24b0c9a470278af2cf",
+      "source_path": "tests/fixtures/bug_example_forms/UCL_Biomass_Plot_Form.xlsx",
+      "sha256": "437c5208e7b7aecbde6eeb56d846710fb56d666238b639fce46f5a302f8a929b",
+      "bytes": 16325,
+      "license": "BSD-2-Clause",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/pyxform/UCL_Biomass_Plot_Form.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "large_production_form",
+        "groups",
+        "repeats",
+        "geopoint",
+        "calculations"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "pyx-02",
+      "title": "Choice filter matrix",
+      "source_family": "XLSForm/pyxform",
+      "source_url": "https://github.com/XLSForm/pyxform/blob/26006d0830570ffa3caead24b0c9a470278af2cf/tests/fixtures/example_forms/choice_filter_test.xlsx",
+      "revision": "26006d0830570ffa3caead24b0c9a470278af2cf",
+      "source_path": "tests/fixtures/example_forms/choice_filter_test.xlsx",
+      "sha256": "2a4131ed91b11a39723b42e7cf1ac391bbc22737330b9dc2095da1bbfb487bad",
+      "bytes": 17715,
+      "license": "BSD-2-Clause",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/pyxform/choice_filter_test.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "choice_filter",
+        "cascading_selects",
+        "choice_auxiliary_columns",
+        "complex_relevance"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "pyx-03",
+      "title": "Field-list appearance form",
+      "source_family": "XLSForm/pyxform",
+      "source_url": "https://github.com/XLSForm/pyxform/blob/26006d0830570ffa3caead24b0c9a470278af2cf/tests/fixtures/example_forms/field-list.xlsx",
+      "revision": "26006d0830570ffa3caead24b0c9a470278af2cf",
+      "source_path": "tests/fixtures/example_forms/field-list.xlsx",
+      "sha256": "4f71cc2c3e5bbcc50439bc5775d030e3e3d195e66335aea9bae8a7f62b95bd19",
+      "bytes": 6247,
+      "license": "BSD-2-Clause",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/pyxform/field-list.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "groups",
+        "appearance",
+        "select_one"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "pyx-04",
+      "title": "Group form",
+      "source_family": "XLSForm/pyxform",
+      "source_url": "https://github.com/XLSForm/pyxform/blob/26006d0830570ffa3caead24b0c9a470278af2cf/tests/fixtures/example_forms/group.xlsx",
+      "revision": "26006d0830570ffa3caead24b0c9a470278af2cf",
+      "source_path": "tests/fixtures/example_forms/group.xlsx",
+      "sha256": "0c253207aa9ba9912e2f7462af17bb789686cd9cbc59f363ab89aab03660f7ec",
+      "bytes": 6400,
+      "license": "BSD-2-Clause",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/pyxform/group.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "groups",
+        "nested_groups",
+        "multilingual_labels"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "pyx-05",
+      "title": "Loop/repeat form",
+      "source_family": "XLSForm/pyxform",
+      "source_url": "https://github.com/XLSForm/pyxform/blob/26006d0830570ffa3caead24b0c9a470278af2cf/tests/fixtures/example_forms/loop.xlsx",
+      "revision": "26006d0830570ffa3caead24b0c9a470278af2cf",
+      "source_path": "tests/fixtures/example_forms/loop.xlsx",
+      "sha256": "dbfb2c636a2f134b58813b328166ae374b173665d88288a845d14d5f3d319d77",
+      "bytes": 11595,
+      "license": "BSD-2-Clause",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/pyxform/loop.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "repeats",
+        "nested_repeats",
+        "repeat_contained_selects"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "pyx-06",
+      "title": "Pull-data form",
+      "source_family": "XLSForm/pyxform",
+      "source_url": "https://github.com/XLSForm/pyxform/blob/26006d0830570ffa3caead24b0c9a470278af2cf/tests/fixtures/example_forms/pull_data.xlsx",
+      "revision": "26006d0830570ffa3caead24b0c9a470278af2cf",
+      "source_path": "tests/fixtures/example_forms/pull_data.xlsx",
+      "sha256": "d117a4bfc1d4e29988932927c84a4dac29531d921fa4e43aaf754e8212503646",
+      "bytes": 4709,
+      "license": "BSD-2-Clause",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/pyxform/pull_data.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "pulldata",
+        "calculations",
+        "secondary_instance_reference"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "pyx-07",
+      "title": "Widget and media form",
+      "source_family": "XLSForm/pyxform",
+      "source_url": "https://github.com/XLSForm/pyxform/blob/26006d0830570ffa3caead24b0c9a470278af2cf/tests/fixtures/example_forms/widgets.xlsx",
+      "revision": "26006d0830570ffa3caead24b0c9a470278af2cf",
+      "source_path": "tests/fixtures/example_forms/widgets.xlsx",
+      "sha256": "3d2eaaf0861f19dade936578802fecb3c49a1dcab4f42349633065ccc8e5adec",
+      "bytes": 12746,
+      "license": "BSD-2-Clause",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/pyxform/widgets.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "appearance",
+        "media_columns",
+        "constraints",
+        "defaults",
+        "read_only_expressions"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {
+        "UX001": 2,
+        "LBL002": 2
+      },
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {
+        "UX001": {
+          "classification": "CONFIRMED_FALSE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "Both rows use bind:jr:constraintMsg; frozen UX001 does not recognize this supported alternate constraint-message header."
+        },
+        "LBL002": {
+          "classification": "CONFIRMED_FALSE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "Both choices intentionally use image media as their visible choice content."
+        }
+      },
+      "notes": ""
+    },
+    {
+      "id": "pyx-08",
+      "title": "XLSForm specification feature form",
+      "source_family": "XLSForm/pyxform",
+      "source_url": "https://github.com/XLSForm/pyxform/blob/26006d0830570ffa3caead24b0c9a470278af2cf/tests/fixtures/example_forms/xlsform_spec_test.xlsx",
+      "revision": "26006d0830570ffa3caead24b0c9a470278af2cf",
+      "source_path": "tests/fixtures/example_forms/xlsform_spec_test.xlsx",
+      "sha256": "97d80ea3f893b5fc940a905bfe33d94f22a46086fcc33c6bce3f58c00fddc519",
+      "bytes": 199248,
+      "license": "BSD-2-Clause",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/pyxform/xlsform_spec_test.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "multilingual_labels",
+        "multilingual_hints",
+        "multilingual_constraint_messages",
+        "appearance",
+        "media_columns",
+        "metadata_rows",
+        "required_expressions",
+        "read_only_expressions",
+        "complex_constraints",
+        "complex_relevance",
+        "calculations",
+        "defaults",
+        "parameters",
+        "notes"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {
+        "I18N001": 35,
+        "LBL001": 1,
+        "UX001": 1,
+        "LBL002": 2
+      },
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {
+        "I18N001": {
+          "classification": "CONFIRMED_TRUE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "A populated label language is paired with a blank declared label language."
+        },
+        "LBL001": {
+          "classification": "CONFIRMED_FALSE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "The note intentionally displays image media instead of text."
+        },
+        "UX001": {
+          "classification": "CONFIRMED_TRUE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "A constraint is present without a recognized constraint message."
+        },
+        "LBL002": {
+          "classification": "CONFIRMED_FALSE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "The two choices intentionally use image media instead of text."
+        }
+      },
+      "notes": ""
+    },
+    {
+      "id": "s4sd-01",
+      "title": "Data confirmation example",
+      "source_family": "stats4sd/xlsform_examples",
+      "source_url": "https://github.com/stats4sd/xlsform_examples/blob/e3ef51c35e07aa151420d7d6f549a403c3111dd8/Data Confirmation Example/Data Confirm Example.xlsx",
+      "revision": "e3ef51c35e07aa151420d7d6f549a403c3111dd8",
+      "source_path": "Data Confirmation Example/Data Confirm Example.xlsx",
+      "sha256": "cc589df745f22d98f420c8ac0f96ff6a55f9175dc5512ef71b27d6fd02b1ffbf",
+      "bytes": 15682,
+      "license": "MIT",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/stats4sd/Data Confirm Example.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "groups",
+        "calculations",
+        "read_only_expressions"
+      ],
+      "expected_pyxform_acceptance": false,
+      "actual_pyxform_outcome": "PX999",
+      "expected_rule_counts": {
+        "PX999": 1
+      },
+      "px999_explanation": "pyxform 4.5.0 treats the choices headers as missing because this workbook uses list name rather than list_name; the supported-boundary message has no frozen PX001-PX006 mapping.",
+      "crash_or_internal_failure": false,
+      "adjudication": {
+        "PX999": {
+          "classification": "PX999_EXPLAINED",
+          "confidence": "HIGH",
+          "rationale": "pyxform 4.5.0 reports mandatory choices headers missing because the workbook uses list name rather than list_name; this message has no frozen PX001-PX006 mapping."
+        }
+      },
+      "notes": ""
+    },
+    {
+      "id": "s4sd-02",
+      "title": "Google Maps link example",
+      "source_family": "stats4sd/xlsform_examples",
+      "source_url": "https://github.com/stats4sd/xlsform_examples/blob/e3ef51c35e07aa151420d7d6f549a403c3111dd8/Google Maps Link Example/GoogleMapsLinkExample.xlsx",
+      "revision": "e3ef51c35e07aa151420d7d6f549a403c3111dd8",
+      "source_path": "Google Maps Link Example/GoogleMapsLinkExample.xlsx",
+      "sha256": "e30077b0fb5caa8f398ce459fd343f46071c0feed9523cfa0807da6bf9bd3e2e",
+      "bytes": 166875,
+      "license": "MIT",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/stats4sd/GoogleMapsLinkExample.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "geopoint",
+        "calculations",
+        "long_expressions",
+        "large_choice_sheet"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "s4sd-03",
+      "title": "Join selected lists and repeat",
+      "source_family": "stats4sd/xlsform_examples",
+      "source_url": "https://github.com/stats4sd/xlsform_examples/blob/e3ef51c35e07aa151420d7d6f549a403c3111dd8/Join two lists of answers together and repeat over them example.xlsx",
+      "revision": "e3ef51c35e07aa151420d7d6f549a403c3111dd8",
+      "source_path": "Join two lists of answers together and repeat over them example.xlsx",
+      "sha256": "6c469579580ffe3542cb692bebb76c4f03ba2d0fb8b5cc33b835ff9040b7d5d8",
+      "bytes": 16212,
+      "license": "MIT",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/stats4sd/Join two lists of answers together and repeat over them example.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "select_multiple",
+        "repeats",
+        "repeat_contained_selects",
+        "calculations"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "s4sd-04",
+      "title": "Multiple-select choice filter",
+      "source_family": "stats4sd/xlsform_examples",
+      "source_url": "https://github.com/stats4sd/xlsform_examples/blob/e3ef51c35e07aa151420d7d6f549a403c3111dd8/Multiple select choice filter example.xlsx",
+      "revision": "e3ef51c35e07aa151420d7d6f549a403c3111dd8",
+      "source_path": "Multiple select choice filter example.xlsx",
+      "sha256": "0f9641ace720c0dc55b4d5645f0eeb1c31bffedbd87994321fe71fd5261be8f0",
+      "bytes": 25279,
+      "license": "MIT",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/stats4sd/Multiple select choice filter example.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "select_multiple",
+        "choice_filter",
+        "choice_auxiliary_columns",
+        "complex_relevance"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "s4sd-05",
+      "title": "Repeat until condition",
+      "source_family": "stats4sd/xlsform_examples",
+      "source_url": "https://github.com/stats4sd/xlsform_examples/blob/e3ef51c35e07aa151420d7d6f549a403c3111dd8/Repeat until condition is met example.xlsx",
+      "revision": "e3ef51c35e07aa151420d7d6f549a403c3111dd8",
+      "source_path": "Repeat until condition is met example.xlsx",
+      "sha256": "00b1716d1f02aad060bff52dad551627be19a04465f09304df3a4dd9d2c737ef",
+      "bytes": 36605,
+      "license": "MIT",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/stats4sd/Repeat until condition is met example.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "repeats",
+        "nested_repeats",
+        "complex_relevance",
+        "calculations"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "s4sd-06",
+      "title": "Repeat through select-multiple answers",
+      "source_family": "stats4sd/xlsform_examples",
+      "source_url": "https://github.com/stats4sd/xlsform_examples/blob/e3ef51c35e07aa151420d7d6f549a403c3111dd8/RepeatingThroughSelect_MultipleAnswers.xlsx",
+      "revision": "e3ef51c35e07aa151420d7d6f549a403c3111dd8",
+      "source_path": "RepeatingThroughSelect_MultipleAnswers.xlsx",
+      "sha256": "80608323f60db775e1644814c166cd00cc18a461d0f8d254acb5390177a4d05d",
+      "bytes": 15620,
+      "license": "MIT",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/stats4sd/RepeatingThroughSelect_MultipleAnswers.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "repeats",
+        "repeat_contained_selects",
+        "multilingual_labels",
+        "multilingual_hints",
+        "required"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {
+        "I18N001": 2
+      },
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {
+        "I18N001": {
+          "classification": "CONFIRMED_TRUE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "A populated label language is paired with a blank declared label language."
+        }
+      },
+      "notes": ""
+    },
+    {
+      "id": "s4sd-07",
+      "title": "Filter select-multiple using another answer",
+      "source_family": "stats4sd/xlsform_examples",
+      "source_url": "https://github.com/stats4sd/xlsform_examples/blob/e3ef51c35e07aa151420d7d6f549a403c3111dd8/filter_select_multiple_using_another.xlsx",
+      "revision": "e3ef51c35e07aa151420d7d6f549a403c3111dd8",
+      "source_path": "filter_select_multiple_using_another.xlsx",
+      "sha256": "2cd426177068e22f6aa2d9905f7b55b4679217cff87da927c3730fdf33548b80",
+      "bytes": 18136,
+      "license": "MIT",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/stats4sd/filter_select_multiple_using_another.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "select_multiple",
+        "choice_filter",
+        "choice_auxiliary_columns",
+        "complex_relevance"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "s4sd-08",
+      "title": "Phone-number regex",
+      "source_family": "stats4sd/xlsform_examples",
+      "source_url": "https://github.com/stats4sd/xlsform_examples/blob/e3ef51c35e07aa151420d7d6f549a403c3111dd8/phone number regex.xlsx",
+      "revision": "e3ef51c35e07aa151420d7d6f549a403c3111dd8",
+      "source_path": "phone number regex.xlsx",
+      "sha256": "c5b152c9236587c93f779f86af9e270d197b1e005d97c9c315feec969a78a827",
+      "bytes": 14560,
+      "license": "MIT",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/stats4sd/phone number regex.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "complex_constraints",
+        "long_expressions",
+        "select_one"
+      ],
+      "expected_pyxform_acceptance": false,
+      "actual_pyxform_outcome": "REJECTED",
+      "expected_rule_counts": {
+        "PX004": 1,
+        "LBL001": 1
+      },
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {
+        "PX004": {
+          "classification": "EXPECTED_PYXFORM",
+          "confidence": "HIGH",
+          "rationale": "The survey references list country while the choices sheet contains no rows, so pyxform correctly rejects it."
+        },
+        "LBL001": {
+          "classification": "CONFIRMED_TRUE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "The visible question has no workbook-visible label."
+        }
+      },
+      "notes": ""
+    },
+    {
+      "id": "s4sd-09",
+      "title": "Select from previous list",
+      "source_family": "stats4sd/xlsform_examples",
+      "source_url": "https://github.com/stats4sd/xlsform_examples/blob/e3ef51c35e07aa151420d7d6f549a403c3111dd8/select_from_previous_list_eg.xlsx",
+      "revision": "e3ef51c35e07aa151420d7d6f549a403c3111dd8",
+      "source_path": "select_from_previous_list_eg.xlsx",
+      "sha256": "47b599f7de31099406b583c0a2d65e1d60641d9553805e32e42eeb52faa61a0e",
+      "bytes": 21069,
+      "license": "MIT",
+      "classification": "SAFE_TO_COMMIT",
+      "committed": true,
+      "path": "committed/stats4sd/select_from_previous_list_eg.xlsx",
+      "synthetic_derivative": false,
+      "constructs": [
+        "choice_filter",
+        "cascading_selects",
+        "choice_auxiliary_columns",
+        "select_multiple"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": ""
+    },
+    {
+      "id": "odk-01",
+      "title": "All question types",
+      "source_family": "getodk/sample-forms",
+      "source_url": "https://github.com/getodk/sample-forms/blob/8faa86f61b44f21008123f3409c4ea3c11653bb7/xml-examples/preview-service/xlsforms/all-question-types-v2024091201-3.xlsx",
+      "revision": "8faa86f61b44f21008123f3409c4ea3c11653bb7",
+      "source_path": "xml-examples/preview-service/xlsforms/all-question-types-v2024091201-3.xlsx",
+      "sha256": "27543b833959811298f492f0219273475245e88f094d20f0201b17fd8f32c397",
+      "bytes": 51118,
+      "license": "LICENSE_UNCLEAR",
+      "classification": "REFERENCE_ONLY",
+      "committed": false,
+      "path": null,
+      "synthetic_derivative": false,
+      "constructs": [
+        "large_production_form",
+        "groups",
+        "repeats",
+        "select_one",
+        "select_multiple",
+        "external_choices",
+        "select_from_file",
+        "appearance",
+        "parameters",
+        "media_columns",
+        "metadata_rows",
+        "defaults",
+        "required_expressions",
+        "read_only_expressions"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {},
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {},
+      "notes": "No repository license was found; exact bytes exercised outside the repository and not redistributed."
+    },
+    {
+      "id": "odk-02",
+      "title": "Socio-economic survey",
+      "source_family": "getodk/sample-forms",
+      "source_url": "https://github.com/getodk/sample-forms/blob/8faa86f61b44f21008123f3409c4ea3c11653bb7/xml-examples/preview-service/xlsforms/socio-economic-survey-v20240515.xlsx",
+      "revision": "8faa86f61b44f21008123f3409c4ea3c11653bb7",
+      "source_path": "xml-examples/preview-service/xlsforms/socio-economic-survey-v20240515.xlsx",
+      "sha256": "7fd3b88ec7d58377f4eaefae17a5147c88942af3bf47b41490a5c9031d2feb61",
+      "bytes": 35562,
+      "license": "LICENSE_UNCLEAR",
+      "classification": "REFERENCE_ONLY",
+      "committed": false,
+      "path": null,
+      "synthetic_derivative": false,
+      "constructs": [
+        "large_production_form",
+        "nested_groups",
+        "nested_repeats",
+        "multilingual_labels",
+        "complex_relevance",
+        "complex_constraints",
+        "calculations",
+        "large_choice_sheet"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {
+        "CHO001": 20
+      },
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {
+        "CHO001": {
+          "classification": "CONFIRMED_TRUE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "The choices list is not referenced by any internal static select."
+        }
+      },
+      "notes": "No repository license was found; exact bytes exercised outside the repository and not redistributed."
+    },
+    {
+      "id": "odk-03",
+      "title": "WHO verbal-autopsy form",
+      "source_family": "getodk/sample-forms",
+      "source_url": "https://github.com/getodk/sample-forms/blob/8faa86f61b44f21008123f3409c4ea3c11653bb7/xml-examples/preview-service/xlsforms/whova_form.xlsx",
+      "revision": "8faa86f61b44f21008123f3409c4ea3c11653bb7",
+      "source_path": "xml-examples/preview-service/xlsforms/whova_form.xlsx",
+      "sha256": "2147741832db1812f4a055bb856c60d7ee254d6dfc8f67fcc5d47e7e1ce227ef",
+      "bytes": 74425,
+      "license": "LICENSE_UNCLEAR",
+      "classification": "REFERENCE_ONLY",
+      "committed": false,
+      "path": null,
+      "synthetic_derivative": false,
+      "constructs": [
+        "large_production_form",
+        "nested_groups",
+        "repeats",
+        "multilingual_labels",
+        "multilingual_hints",
+        "complex_relevance",
+        "complex_constraints",
+        "calculations",
+        "large_choice_sheet",
+        "required"
+      ],
+      "expected_pyxform_acceptance": true,
+      "actual_pyxform_outcome": "ACCEPTED",
+      "expected_rule_counts": {
+        "UX001": 2,
+        "CHO001": 2,
+        "I18N001": 62
+      },
+      "px999_explanation": null,
+      "crash_or_internal_failure": false,
+      "adjudication": {
+        "UX001": {
+          "classification": "CONFIRMED_TRUE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "A constraint is present without a recognized constraint message."
+        },
+        "CHO001": {
+          "classification": "CONFIRMED_TRUE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "The choices list is not referenced by any internal static select."
+        },
+        "I18N001": {
+          "classification": "CONFIRMED_TRUE_POSITIVE",
+          "confidence": "HIGH",
+          "rationale": "A populated label language is paired with a blank declared label language."
+        }
+      },
+      "notes": "No repository license was found; exact bytes exercised outside the repository and not redistributed."
+    }
+  ]
+}
